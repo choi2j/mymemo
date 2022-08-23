@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <title>MyMemo</title>
+</head>
+<body>
+
+    <%- include('menu.html') %>
+
+    <div class="wrapper">
+
+        <p class="container-title">메모 수정하기</p>
+
+        <div class="container">
+    
+            <form action="/edit?_method=PUT" method="POST">
+                <input value="<%= memo._id %>" name="id" style="display : none">
+                <label for="title">
+                    <p>메모 제목</p>
+                    <input type="text" name="title" id="title" value="<%= memo.title %>" class="title">
+                </label>
+                <label for="content">
+                    <p>메모 내용</p>
+                    <textarea type="text" name="content" id="content" value="<%= memo.content %>" cols="100" rows="20" class="content"></textarea>
+                </label>
+                <input type="submit" value="edit" class="submit">
+            </form>
+    
+        </div>
+    
+    </div>
+
+</body>
+</html>

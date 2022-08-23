@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/public/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <title>MyMemo</title>
+</head>
+<body>
+
+    <%- include('menu.html') %>
+
+    <div class="wrapper">
+
+        <p class="container-title">홈</p>
+
+        <div class="container">
+    
+            <% for (var i = 0; i < memo.length; i++) { %>
+                <div class="memo">
+                    <div class="memo-sets">
+                        <button class="delete" data-id="<%= memo[i]._id %>"><i class="fa fa-trash"></i></button>
+                        <a href="edit/<%= memo[i]._id %>" class="memo-edit"><i class="fa fa-edit"></i></a>
+                    </div>
+                    <p class="memo-title"><%= memo[i].title %></p>
+                    <p class="memo-date"><%= memo[i].date%></p>
+                    <p class="memo-content"><%= memo[i].content %></p>
+                </div>
+            <% } %>
+    
+            <% if (memo.length == 0) {%>
+                <p class="notice">메모를 작성해주세요!</p>
+            <% } %> 
+    
+        </div>
+        
+    </div>
+
+
+
+</body>
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script>
+    $('.delete').click((e) => {
+        $.ajax({
+            method: 'DELETE',
+            url: '/delete',
+            data: { _id : e.target.dataset.id }
+        }).done((result) => {
+            $(this).parent('.memo').fadeOut();
+        })
+    })
+</script>
+
+</html>
