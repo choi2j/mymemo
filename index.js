@@ -44,7 +44,6 @@ app.post('/add', (req,res) => {
         })
     })
     res.redirect('/')
-    res.redirect('/')
 })
 
 app.get('/write', (req,res) => {

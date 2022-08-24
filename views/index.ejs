@@ -19,15 +19,17 @@
         <div class="container">
     
             <% for (var i = 0; i < memo.length; i++) { %>
-                <div class="memo">
-                    <div class="memo-sets">
-                        <button class="delete" data-id="<%= memo[i]._id %>"><i class="fa fa-trash"></i></button>
-                        <a href="edit/<%= memo[i]._id %>" class="memo-edit"><i class="fa fa-edit"></i></a>
+                <span>
+                    <div class="memo">
+                        <div class="memo-sets">
+                            <button class="delete" data-id="<%= memo[i]._id %>"><i class="fa fa-trash"></i></button>
+                            <a href="edit/<%= memo[i]._id %>" class="memo-edit"><i class="fa fa-edit"></i></a>
+                        </div>
+                        <p class="memo-title"><%= memo[i].title %></p>
+                        <p class="memo-date"><%= memo[i].date%></p>
+                        <p class="memo-content"><%= memo[i].content %></p>
                     </div>
-                    <p class="memo-title"><%= memo[i].title %></p>
-                    <p class="memo-date"><%= memo[i].date%></p>
-                    <p class="memo-content"><%= memo[i].content %></p>
-                </div>
+                </span>
             <% } %>
     
             <% if (memo.length == 0) {%>
@@ -50,7 +52,7 @@
             url: '/delete',
             data: { _id : e.target.dataset.id }
         }).done((result) => {
-            $(this).parent('.memo').fadeOut();
+            $(this).parent('span').fadeOut();
         })
     })
 </script>
