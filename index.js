@@ -53,7 +53,7 @@ app.get('/write', (req,res) => {
 app.delete('/delete', (req,res) => {
     req.body._id = parseInt(req.body._id)
     db.collection('memo').deleteOne(req.body, (err, result) => {
-        console.log(req.body._id)
+        console.log(req.body)
         console.log('delete done.')
     })
     res.redirect('/')

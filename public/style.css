@@ -128,6 +128,7 @@ label {
     overflow-y: scroll;
     margin-right: 1rem;
     margin-bottom: 1rem;
+    box-shadow: #333 0px 0px 1px;
 }
 
 .memo-title {
@@ -153,10 +154,13 @@ label {
 }
 
 .memo-sets {
+    position: sticky;
+    top: 0;
     text-align: right;
     padding: 0.1rem;
     background: #ddd;
 }
+
 
 .delete {
     background: transparent;
