@@ -16,8 +16,8 @@ MongoClient.connect('mongodb+srv://admin:1234@mymemo.wpwmkyg.mongodb.net/?retryW
 
     db = client.db('mymemo');
 
-	app.listen(8080, function () {
-		console.log('listening on 8080')
+	app.listen(8000, function () {
+		console.log('listening on 8000')
 	});
 });
 
@@ -50,13 +50,12 @@ app.get('/write', (req,res) => {
     res.render('write.ejs')
 })
 
-app.delete('/delete', (req,res) => {
-    req.body._id = parseInt(req.body._id)
-    db.collection('memo').deleteOne(req.body, (err, result) => {
-        console.log(req.body)
+app.delete('/delete/:id', (req,res) => {
+    const id = +req.params.id;
+    db.collection('memo').deleteOne({ _id : parseInt(id) }, (err, result) => {
+        console.log(id)
         console.log('delete done.')
-    })
-    res.redirect('/')
+    });
 })
 
 app.get('/edit/:_id', (req, res) => {
@@ -66,8 +65,8 @@ app.get('/edit/:_id', (req, res) => {
     })
 })
 
-app.put('/edit', (req, res) => { 
-    db.collection('memo').updateOne({ _id : parseInt(req.body.id) }, {$set : { title : req.body.title , content : req.body.content }}, () => {
+app.put('/edit', (req, res) => {
+    db.collection('memo').updateOne({ _id : parseInt(req.body.id) }, { $set : { title : req.body.title , content : req.body.content } }, () => {
         console.log('edit done.')
         res.redirect('/')
     })
